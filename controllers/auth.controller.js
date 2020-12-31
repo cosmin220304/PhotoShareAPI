@@ -33,8 +33,9 @@ const register = async (req, res) => {
         });
 
         sendResponse(res, StatusCodes.CREATED, null, user);
+
     } catch (error) {
-        sendResponse(res, null, error);
+        sendResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, error);
     }
 };
 
@@ -53,13 +54,15 @@ const login = async (req, res) => {
         if (!checkPassword) {
             return sendResponse(res, StatusCodes.FORBIDDEN, 'password doesn\'t match');
         }
+
         const token = encrypt({
             userId: user._id,
         });
 
         sendResponse(res, StatusCodes.Ok, null, token);
+
     } catch (error) {
-        sendResponse(res, null, error);
+        sendResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, error);
     }
 };
 

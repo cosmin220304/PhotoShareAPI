@@ -18,7 +18,7 @@ const create = async (req, res) => {
         sendResponse(res, StatusCodes.CREATED, null, photo);
 
     } catch (error) {
-        sendResponse(res, null, error);
+        sendResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, error);
     }
 };
 
@@ -26,10 +26,10 @@ const getAll = async (req, res) => {
     try {
         const photos = await PhotoModel.find({});
 
-        sendResponse(res, null, null, photos);
+        sendResponse(res, StatusCodes.OK, null, photos);
 
     } catch (error) {
-        sendResponse(res, null, error);
+        sendResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, error);
     }
 };
 
@@ -44,10 +44,10 @@ const getById = async (req, res) => {
             _id: id
         });
 
-        sendResponse(res, null, null, photo);
+        sendResponse(res, StatusCodes.OK, null, photo);
 
     } catch (error) {
-        sendResponse(res, null, error);
+        sendResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, error);
     }
 }
 
@@ -56,10 +56,11 @@ const getRandom = async (req, res) => {
         const count = await PhotoModel.countDocuments();
         const random = Math.floor(Math.random() * count);
         const photo = await PhotoModel.findOne({}, null, { skip: random });
-        sendResponse(res, null, null, photo);
+
+        sendResponse(res, StatusCodes.OK, null, photo);
 
     } catch (error) {
-        sendResponse(res, null, error);
+        sendResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, error);
     }
 };
 
@@ -100,10 +101,10 @@ const update = async (req, res) => {
             }
         );
 
-        sendResponse(res, null, null, updatedPhoto);
+        sendResponse(res, StatusCodes.OK, null, updatedPhoto);
 
     } catch (error) {
-        sendResponse(res, null, error);
+        sendResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, error);
     }
 };
 
@@ -132,7 +133,7 @@ const deleteById = async (req, res) => {
         sendResponse(res, StatusCodes.OK, null, photo);
 
     } catch (error) {
-        sendResponse(res, null, error);
+        sendResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, error);
     }
 };
 

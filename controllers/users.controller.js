@@ -14,9 +14,11 @@ const getUser = async (req, res) => {
         }
 
         const {password, ...returnUser} = user._doc;
+
         sendResponse(res, StatusCodes.OK, null, returnUser);
+
     } catch (error) {
-        sendResponse(res, null, error);
+        sendResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, error);
     }
 };
 

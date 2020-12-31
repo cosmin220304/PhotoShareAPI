@@ -3,9 +3,9 @@ const { StatusCodes } = require('http-status-codes');
 
 const sendResponse = (res, httpStatus, error, data) => {
     if (error) {
-        httpStatus = httpStatus || StatusCodes.INTERNAL_SERVER_ERROR;
         let message = error;
 
+        // We don't want users to see server errors
         if (httpStatus === StatusCodes.INTERNAL_SERVER_ERROR) {
             console.log(error);
             message = 'Something went bad!';
@@ -17,7 +17,6 @@ const sendResponse = (res, httpStatus, error, data) => {
         res.status(StatusCodes.NO_CONTENT).json({ success: false, message: 'Not found' });
     }
     else {
-        httpStatus = httpStatus || StatusCodes.OK;
         res.status(httpStatus).json({ success: true, data });
     }
 }
