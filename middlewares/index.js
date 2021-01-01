@@ -11,7 +11,7 @@ const requireAuth = (req, res, next) => {
         req.user = claims;
         next();
     } catch (error) {
-        sendResponse(res, null, error);
+        sendResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, error);
     }
 };
 
@@ -23,7 +23,7 @@ const payloadValidation = (schema) => (req, res, next) => {
         }
         next();
     } catch (error) {
-        sendResponse(res, null, error);
+        sendResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, error);
     }
 };
 
