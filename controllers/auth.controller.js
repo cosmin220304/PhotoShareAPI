@@ -59,7 +59,7 @@ const login = async (req, res) => {
             userId: user._id,
         });
 
-        sendResponse(res, StatusCodes.Ok, null, token);
+        sendResponse(res, StatusCodes.OK, null, token);
 
     } catch (error) {
         sendResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, error);
